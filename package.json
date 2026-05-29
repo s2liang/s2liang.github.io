@@ -1,0 +1,16 @@
+{
+  "name": "s2liang-portfolio",
+  "version": "1.0.0",
+  "description": "Sherrie Liang — personal site",
+  "scripts": {
+    "serve": "npx serve . -p 3000",
+    "deploy:gh": "gh-pages -d . -b gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s2liang/s2liang.github.io"
+  },
+  "keywords": ["portfolio", "personal-website", "vue3", "ai"],
+  "author": "Sherrie Liang",
+  "license": "MIT"
+}
