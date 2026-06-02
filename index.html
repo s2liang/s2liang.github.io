@@ -8,12 +8,15 @@
     <meta name="description" content="AI Solution Architect designing production-ready AI systems on cloud platforms — LLMs, RAG, agents, and MLOps.">
     <meta name="keywords" content="AI,Solution Architect,LLM,RAG,Azure,AWS,MLOps,deployable AI">
     <meta name="theme-color" content="#0d1117">
-    <link rel="icon" type="image/svg+xml" href="static/img/avatar.svg">
+    <link rel="icon" type="image/svg+xml" href="static/img/brand_logo_no_bg.png">
     <link rel="alternate icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Doto:ROND@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/index.css?v=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
 </head>
 
@@ -71,36 +74,35 @@
                             <p>{{ card.desc }}</p>
                         </div>
                     </div>
-                    <div class="quote-box">
+
+
+                    <!-- <div class="quote-box">
                         <i class="ri-double-quotes-l"></i>
                         <p>{{ hitokoto }}</p>
-                    </div>
+                    </div> -->
                 </section>
 
-                <!-- Skills -->
-                <section id="skills" class="section" :class="{ visible: visibleSections.skills }">
-                    <div class="section-header">
-                        <!-- <i class="ri-stack-line"></i> -->
-                        <h2>Technology Stack</h2>
-                        <span class="section-line"></span>
-                    </div>
-                    <div class="tech-categories">
-                        <div v-for="category in skills" :key="category.name" class="tech-category">
-                            <h3><i :class="category.icon"></i> {{ category.name }}</h3>
-                            <div class="tech-items">
-                                <div v-for="item in category.items" :key="item.name" class="tech-item"
-                                    :data-level="item.level">
-                                    <span class="tech-name">{{ item.name }}</span>
-                                    <div class="tech-bar">
-                                        <div class="tech-progress"
-                                            :style="{ width: visibleSections.skills ? item.level + '%' : 0 }"></div>
-                                    </div>
-                                    <span class="tech-level">{{ item.levelName }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Skills --> 
+                <section id="skills" class="section" :class="{ visible: visibleSections.skills }"> 
+                    <div class="section-header"> 
+                    <!-- <i class="ri-stack-line"></i> --> 
+                    <h2>Technology Stack</h2> 
+                    <span class="section-line"></span> 
+                    </div> 
+                
+                    <!-- Replaced the old tech-categories grid with your new fluid wrapping cloud container -->
+                    <div class="tech-rain-container"> 
+                    <span 
+                        v-for="skill in skills" 
+                        :key="skill.name" 
+                        class="tech-word" 
+                        :class="skill.level"
+                    > 
+                        {{ skill.name }} 
+                    </span> 
+                    </div> 
                 </section>
+  
 
                 <!-- Projects -->
                 <section id="projects" class="section" :class="{ visible: visibleSections.projects }">
@@ -111,20 +113,44 @@
                     </div>
                     <div class="projects-grid">
                         <div v-for="project in projects" :key="project.title" class="project-card">
+                          
+                          <!-- Left Side: Wrap existing contents inside the project-body div -->
+                          <div class="project-body">
                             <div class="project-header">
-                                <i :class="project.icon"></i>
-                                <h3>{{ project.title }}</h3>
+                              <i :class="project.icon"></i>
+                              <!-- Wrapped the title in an anchor tag linked to project.link -->
+                              <h3>
+                                <a :href="project.link" target="_blank" class="project-link">
+                                  {{ project.title }}
+                                </a>
+                              </h3>
                             </div>
+                            
                             <p class="project-desc">{{ project.desc }}</p>
+                            
                             <div class="project-tags">
-                                <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
+                              <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
                             </div>
+                            
                             <div class="project-metrics">
                                 <div v-for="metric in project.metrics" :key="metric.label" class="metric">
-                                    <span class="metric-value">{{ metric.value }}</span>
                                     <span class="metric-label">{{ metric.label }}</span>
+                                    <a v-if="metric.url" :href="metric.url" target="_blank" rel="noopener noreferrer">
+                                        <i :class="metric.icon || 'ri-external-link-line'"></i>
+                                    </a>
                                 </div>
+
+                                
                             </div>
+                          </div> <!-- End of project-body -->
+                      
+                          <!-- Right Side: Add the clickable image container -->
+                          <div class="project-image-container">
+                            <a :href="project.link" target="_blank">
+                              <img :src="project.image" :alt="project.title + ' Screenshot'">
+                            </a>
+                          </div>
+                      
                         </div>
                     </div>
                 </section>
@@ -160,12 +186,13 @@
                 </section>
 
                 <!-- Poetry -->
-                <section id="poetry" class="section section-poetry" :class="{ visible: visibleSections.poetry }">
+                <!-- <section id="poetry" class="section section-poetry" :class="{ visible: visibleSections.poetry }">
                     <div class="poetry-box">
                         <i class="ri-quill-pen-line"></i>
                         <p>{{ poetry }}</p>
                     </div>
-                </section>
+                </section> -->
+
 
                 <!-- Links -->
                 <section id="links" class="section" :class="{ visible: visibleSections.links }">
@@ -183,6 +210,14 @@
                         </a>
                     </div>
                 </section>
+
+                <!-- Independent Quote Box -->
+                <div class="quote-section">
+                    <div class="quote-box">
+                        <i class="ri-double-quotes-l"></i>
+                        <p>We are shaped by our thoughts; we become what we think.</p>
+                    </div>
+                </div>
             </main>
 
             <!-- Footer -->
@@ -206,7 +241,7 @@
                     <p class="copyright-sub">
                         <span>Powered by Vue 3</span>
                         <span class="divider">|</span>
-                        <!-- <span><a href="https://github.com/s2liang" target="_blank">GitHub</a></span>
+                        <!-- <span><a href="https://github.com/" target="_blank">GitHub</a></span>
                         <span class="divider">|</span> -->
                         <span>Made with <i class="ri-heart-fill"></i></span>
                     </p>
@@ -217,269 +252,8 @@
 
     <script src="static/js/fluid-background.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
-    <script>
-        const { createApp, ref, reactive, onMounted, computed } = Vue;
-
-        createApp({
-            setup() {
-                // ===== Site config =====
-                const site = reactive({
-                    name: 'Sherrie Liang',
-                    brand: 'SL',
-                    slogan: 'Designing Human-centered AI solutions that ship to production'
-                });
-
-                // ===== Navigation =====
-                const navLinks = ref([
-                    { id: 'about', title: 'About' },
-                    { id: 'skills', title: 'Skills' },
-                    { id: 'projects', title: 'Projects' },
-                    { id: 'experience', title: 'Experience' },
-                    { id: 'contact', title: 'Contact' }
-                ]);
-
-                // ===== Profile =====
-                const profile = reactive({
-                    name: 'Sherrie Liang',
-                    avatar: 'static/img/avatar.svg',
-                    title: 'AI Solution Architect',
-                    bio: 'Bridging business goals and engineering — from AI agents orchestration and RAG pipelines to secure, scalable deployments on cloud AI platforms.'
-                });
-
-                // ===== Social links (update LinkedIn / email when ready) =====
-                const socialLinks = ref([
-                    { name: 'GitHub', icon: 'ri-github-fill', url: 'https://github.com/s2liang' },
-                    { name: 'LinkedIn', icon: 'ri-linkedin-fill', url: 'https://www.linkedin.com/in/sherrie-liang' },
-                    { name: 'Email', icon: 'ri-mail-fill', url: 'mailto:sherryliang23@outlook.com' },
-                    { name: 'Google Scholar', icon: 'ri-graduation-cap-fill', url: 'https://scholar.google.com/citations?user=-6BwIkQAAAAJ&hl=en' }
-                ]);
-
-                // ===== About =====
-                const about = reactive({
-                    intro: 'AI Solution Architect with a focus on end-to-end solution design: discovery and requirements, reference architectures, proof-of-concepts, and production rollout. Experienced aligning stakeholders, data platforms, and engineering teams around measurable outcomes for generative AI and intelligent automation.',
-                    cards: [
-                        { icon: 'ri-brain-fill', title: 'Generative AI', desc: 'LLM integration, prompt engineering, evaluation, and guardrails for safe, reliable user-facing experiences' },
-                        { icon: 'ri-search-eye-fill', title: 'RAG & Knowledge', desc: 'Retrieval-augmented generation, vector search, document pipelines, and grounding strategies for enterprise knowledge' },
-                        { icon: 'ri-robot-2-fill', title: 'Agents & Automation', desc: 'Multi-step agents, tool use, and workflow orchestration to automate complex business processes' },
-                        { icon: 'ri-cloud-fill', title: 'Cloud AI Platforms', desc: 'Solution design on Azure OpenAI, AWS Bedrock, and related managed AI, data, and security services' },
-                        { icon: 'ri-shield-check-fill', title: 'Responsible AI', desc: 'Security, privacy, compliance, and operational controls for enterprise-grade AI deployments' },
-                        { icon: 'ri-line-chart-fill', title: 'MLOps & Delivery', desc: 'CI/CD, monitoring, cost management, and lifecycle practices from pilot to production at scale' }
-                    ]
-                });
-
-                // ===== Skills =====
-                const skills = ref([
-                    {
-                        name: 'AI & ML',
-                        icon: 'ri-brain-fill',
-                        items: [
-                            { name: 'LLMs & Prompting', level: 90, levelName: 'Advanced' },
-                            { name: 'RAG & Vector Search', level: 88, levelName: 'Advanced' },
-                            { name: 'Agents & Orchestration', level: 82, levelName: 'Proficient' },
-                            { name: 'Model Evaluation', level: 80, levelName: 'Proficient' }
-                        ]
-                    },
-                    {
-                        name: 'Cloud & Platforms',
-                        icon: 'ri-cloud-fill',
-                        items: [
-                            { name: 'Azure AI / OpenAI', level: 90, levelName: 'Advanced' },
-                            { name: 'AWS (Bedrock, SageMaker)', level: 78, levelName: 'Proficient' },
-                            { name: 'APIs & Integration', level: 85, levelName: 'Advanced' },
-                            { name: 'Identity & Security', level: 80, levelName: 'Proficient' }
-                        ]
-                    },
-                    {
-                        name: 'Data & Engineering',
-                        icon: 'ri-database-2-fill',
-                        items: [
-                            { name: 'Python', level: 88, levelName: 'Advanced' },
-                            { name: 'SQL & Data Pipelines', level: 82, levelName: 'Proficient' },
-                            { name: 'Vector DBs', level: 85, levelName: 'Advanced' },
-                            { name: 'TypeScript / APIs', level: 72, levelName: 'Proficient' }
-                        ]
-                    },
-                    {
-                        name: 'Delivery & Ops',
-                        icon: 'ri-tools-fill',
-                        items: [
-                            { name: 'Solution Architecture', level: 92, levelName: 'Advanced' },
-                            { name: 'Docker / Kubernetes', level: 78, levelName: 'Proficient' },
-                            { name: 'CI/CD & MLOps', level: 80, levelName: 'Proficient' },
-                            { name: 'Observability & Cost', level: 82, levelName: 'Proficient' }
-                        ]
-                    }
-                ]);
-
-                // ===== Projects (edit with your real work) =====
-                const projects = ref([
-                    {
-                        icon: 'ri-chat-smile-3-fill',
-                        title: 'Enterprise Copilot',
-                        desc: 'Designed a secure conversational assistant over internal documents with RAG, role-based access, and content safety filters. Led architecture, PoC, and phased rollout with adoption metrics.',
-                        tags: ['Azure OpenAI', 'RAG', 'Vector Search', 'Python'],
-                        metrics: [
-                            { value: 'PoC → Prod', label: 'Delivery path' },
-                            { value: 'RBAC', label: 'Access model' }
-                        ]
-                    },
-                    {
-                        icon: 'ri-file-search-fill',
-                        title: 'Knowledge Search Platform',
-                        desc: 'Built a unified search experience across structured and unstructured sources using embeddings, hybrid retrieval, and re-ranking for higher answer quality.',
-                        tags: ['Embeddings', 'Elasticsearch', 'LangChain', 'FastAPI'],
-                        metrics: [
-                            { value: 'Hybrid', label: 'Retrieval' },
-                            { value: 'SLA', label: 'Latency targets' }
-                        ]
-                    },
-                    {
-                        icon: 'ri-robot-2-fill',
-                        title: 'Agent Workflow Automation',
-                        desc: 'Orchestrated multi-step agents with tool calling for ticket triage, summarization, and handoff to human experts — with audit logs and human-in-the-loop checkpoints.',
-                        tags: ['Agents', 'Function Calling', 'Event-driven', 'Monitoring'],
-                        metrics: [
-                            { value: 'HITL', label: 'Governance' },
-                            { value: 'Traceable', label: 'Audit trail' }
-                        ]
-                    },
-                    {
-                        icon: 'ri-shield-check-fill',
-                        title: 'AI Landing Zone',
-                        desc: 'Defined reference architecture for AI workloads: networking, secrets, observability, cost controls, and responsible-AI policies aligned to enterprise standards.',
-                        tags: ['IaC', 'Policy', 'MLOps', 'FinOps'],
-                        metrics: [
-                            { value: 'Multi-tenant', label: 'Isolation' },
-                            { value: 'Guardrails', label: 'Safety layer' }
-                        ]
-                    }
-                ]);
-
-                // ===== Experience (edit dates and employers) =====
-                const experience = ref([
-                    { date: 'Present', title: 'AI Solution Architect', company: 'Your organization', desc: 'Own solution design for generative AI initiatives — workshops, reference architectures, PoCs, and production paths with security and operations built in.' },
-                    { date: '2023 - 2025', title: 'Senior Engineer / Architect', company: 'Previous roles', desc: 'Delivered cloud-native platforms, data products, and integration patterns that inform today\'s AI solution work.' },
-                    { date: '2021 - 2023', title: 'Software & Data Engineering', company: 'Education & early career', desc: 'Built strong fundamentals in distributed systems, APIs, and data — the base for designing reliable AI solutions at scale.' }
-                ]);
-
-                // ===== Stats =====
-                const stats = ref([
-                    { value: 'AI', label: 'Solution focus' },
-                    { value: 'RAG', label: 'Knowledge systems' },
-                    { value: 'Cloud', label: 'Platform delivery' },
-                    { value: '', label: 'Site visitors', id: 'busuanzi_value_site_uv' }
-                ]);
-
-                // ===== Resource links =====
-                const resourceLinks = ref([
-                    { name: 'Azure AI', icon: 'ri-microsoft-fill', url: 'https://azure.microsoft.com/en-us/products/ai-services', desc: 'Cloud AI services' },
-                    { name: 'AWS AI', icon: 'ri-cloud-fill', url: 'https://aws.amazon.com/ai/', desc: 'Bedrock & ML on AWS' },
-                    { name: 'My GitHub', icon: 'ri-github-fill', url: 'https://github.com/s2liang', desc: 'Code & experiments' }
-                ]);
-
-                // ===== dynamic data =====
-                const typedText = ref('');
-                const hitokoto = ref('Loading…');
-                const poetry = ref('Loading…');
-                const currentYear = computed(() => new Date().getFullYear());
-
-                // ===== visible sections =====
-                const visibleSections = reactive({
-                    about: false, skills: false, projects: false,
-                    experience: false, stats: false, poetry: false, links: false
-                });
-
-                // ===== typewriter effect =====
-                const typeWriter = () => {
-                    const texts = ['Sherrie Liang', 'AI Solution Architect', 'From idea to production', 'Intelligent · Secure · Scalable'];
-                    let textIndex = 0, charIndex = 0, isDeleting = false;
-
-                    const type = () => {
-                        const current = texts[textIndex];
-                        typedText.value = isDeleting ? current.substring(0, --charIndex) : current.substring(0, ++charIndex);
-
-                        if (!isDeleting && charIndex === current.length) {
-                            setTimeout(type, 2000);
-                            isDeleting = true;
-                            return;
-                        }
-                        if (isDeleting && charIndex === 0) {
-                            isDeleting = false;
-                            textIndex = (textIndex + 1) % texts.length;
-                        }
-                        setTimeout(type, isDeleting ? 35 : 75);
-                    };
-                    type();
-                };
-
-                // Fluid line background — move mouse (or touch) to stir
-                const initParticles = () => {
-                    if (window.FluidBackground) {
-                        window.FluidBackground.init('particles');
-                    }
-                };
-
-                // ===== observer =====
-                const initScrollObserver = () => {
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            const id = entry.target.id;
-                            if (id && visibleSections.hasOwnProperty(id)) {
-                                visibleSections[id] = entry.isIntersecting;
-                            }
-                        });
-                    }, { threshold: 0.15 });
-
-                    document.querySelectorAll('.section').forEach(section => {
-                        observer.observe(section);
-                    });
-                };
-
-                // ===== load external data =====
-                const loadExternalData = () => {
-                    // one sentence
-                    fetch('https://v1.hitokoto.cn')
-                        .then(r => r.json())
-                        .then(d => { hitokoto.value = d.hitokoto + ' —— ' + (d.from || ''); })
-                        .catch(() => { hitokoto.value = 'The best way to predict the future is to invent it. — Alan Kay'; });
-
-                    // poetry
-                    const js = document.createElement('script');
-                    js.src = 'https://sdk.jinrishici.com/v2/browser/jinrishici.js';
-                    js.onload = () => {
-                        jinrishici.load(r => { poetry.value = r.data.content; });
-                    };
-                    document.body.appendChild(js);
-
-                    // visitor statistics
-                    const bs = document.createElement('script');
-                    bs.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-                    bs.async = true;
-                    document.body.appendChild(bs);
-                };
-
-                onMounted(() => {
-                    typeWriter();
-                    initParticles();
-                    initScrollObserver();
-                    loadExternalData();
-
-                    // tab switch
-                    document.addEventListener('visibilitychange', () => {
-                        document.title = document.hidden ? 'SL | Come back 👋' : `${site.name} | AI Solution Architect `;
-                    });
-
-                    console.log(`%c⚡ ${site.name} — AI Solution Designer`, 'color:#58a6ff;font-size:16px;font-weight:bold');
-                });
-
-                return {
-                    site, navLinks, profile, socialLinks, about, skills, projects,
-                    experience, stats, resourceLinks, typedText, hitokoto, poetry,
-                    currentYear, visibleSections
-                };
-            }
-        }).mount('#app');
-    </script>
+    <script src="static/js/app.js"></script> 
+    
 </body>
 
 </html>
