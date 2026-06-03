@@ -9,6 +9,9 @@
     const PEN_SIZE = 48;
     const STROKE_COLOR = '#00FFFF';
     const BG_COLOR = '#000000';
+    const isTouchDevice =
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0;
 
     let canvas;
     let ctx;
@@ -101,7 +104,15 @@
         numRows = canvasHeight / RESOLUTION;
         const area = canvasWidth * canvasHeight;
         // Higher density (CodePen uses 5000 on 500×500); capped for performance
-        speckCount = Math.min(5000, Math.max(2000, Math.floor(area / 100)));
+        // speckCount = Math.min(5000, Math.max(2000, Math.floor(area / 100)));
+        if (isTouchDevice) {
+            speckCount = 1200;
+        } else {
+            speckCount = Math.min(
+                5000,
+                Math.max(2000, Math.floor(area / 100))
+            );
+        }
         buildGrid();
     }
 
@@ -267,12 +278,12 @@
     }
 
     function onTouchStart(e) {
-        e.preventDefault();
+        // e.preventDefault();
         updateMouseFromEvent(e);
     }
 
     function onTouchMove(e) {
-        e.preventDefault();
+        // e.preventDefault();
         updateMouseFromEvent(e);
     }
 
@@ -290,8 +301,8 @@
     function bindEvents() {
         w.addEventListener('mousemove', onMouseMove);
         w.addEventListener('mouseleave', onMouseLeave);
-        w.addEventListener('touchstart', onTouchStart, { passive: false });
-        w.addEventListener('touchmove', onTouchMove, { passive: false });
+        w.addEventListener('touchstart', onTouchStart, { passive: true });
+        w.addEventListener('touchmove', onTouchMove, { passive: true });
         w.addEventListener('touchend', onTouchEnd);
         w.addEventListener('resize', onResize);
     }

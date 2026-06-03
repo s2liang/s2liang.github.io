@@ -29,10 +29,22 @@
 
         <div class="app-container">
             <!-- navbar -->
-            <nav class="navbar">
+            <!-- <nav class="navbar">
                 <div class="nav-brand">{{ site.brand }}</div>
                 <div class="nav-links">
                     <a v-for="link in navLinks" :key="link.id" :href="'#' + link.id">{{ link.title }}</a>
+                </div>
+            </nav> -->
+            <nav class="navbar">
+                <div class="nav-brand">{{ site.brand }}</div>
+                <button class="nav-burger" @click="menuOpen = !menuOpen" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="nav-links" :class="{ open: menuOpen }">
+                    <a v-for="link in navLinks" :key="link.id" 
+                       :href="'#' + link.id" @click="menuOpen = false">
+                       {{ link.title }}
+                    </a>
                 </div>
             </nav>
 

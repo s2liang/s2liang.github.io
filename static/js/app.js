@@ -18,6 +18,9 @@ createApp({
             { id: 'contact', title: 'Contact' }
         ]);
 
+        // ===== Menu open state =====
+        const menuOpen = ref(false);
+
         // ===== Profile =====
         const profile = reactive({
             name: 'Sherrie Liang',
@@ -213,7 +216,7 @@ createApp({
 
         return {
             site, navLinks, profile, socialLinks, about, skills, projects,
-            experience, stats, resourceLinks, typedText, currentYear, visibleSections
+            experience, stats, resourceLinks, typedText, currentYear, visibleSections, menuOpen
         };
     }
 }).mount('#app');

@@ -96,6 +96,10 @@ body {
 .nav-links { display: flex; gap: 1.8rem; }
 .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
 .nav-links a:hover { color: var(--accent); }
+.nav-links a.active {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+}
 
 /* ===== Hero ===== */
 .hero {
@@ -483,7 +487,7 @@ body {
 
 @media (max-width: 768px) {
     html { font-size: 14px; }
-    .navbar { padding: 0.7rem 1.2rem; }
+    .navbar { padding: 0.7rem 1.2rem; position: relative; }
     .nav-links { display: none; }
     .hero { padding-top: 4rem; }
     .title { font-size: 1.6rem; }
@@ -496,6 +500,61 @@ body {
     .contact-items { justify-content: center; flex-wrap: wrap; }
 }
 
+/* ===== Navbar Burger ===== */
+.nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    width: 40px;
+    height: 40px;
+}
+.nav-burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+@media (max-width: 768px) {
+    .nav-burger { display: flex; }   /* show burger */
+
+    .nav-links {
+        display: none;               /* hidden by default */
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: var(--bg-primary);
+        flex-direction: column;
+        padding: 1rem 1.2rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border-color, #333);
+        z-index: 999;
+    }
+    .nav-links.open { display: flex; } /* shown when toggled */
+    
+    /* .navbar { position: relative; }   needed for absolute dropdown */
+
+    /* Burger Animation when Open */
+    .nav-burger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .nav-burger.open span:nth-child(2) {
+        opacity: 0;
+    }
+    .nav-burger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}
+
+
+
 @media (max-width: 480px) {
     html { font-size: 13px; }
     .avatar-container { width: 90px; height: 90px; }
@@ -505,8 +564,15 @@ body {
 }
 
 /* ===== Scrollbar ===== */
+/* ::-webkit-scrollbar { display: none; }
+html { scrollbar-width: none; -ms-overflow-style: none; } */
+
 ::-webkit-scrollbar { display: none; }
-html { scrollbar-width: none; -ms-overflow-style: none; }
+body { 
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch; /* ← fixes iOS scroll */
+}
 
 /* ===== Selection ===== */
 ::selection { background: var(--accent); color: var(--bg-primary); }
