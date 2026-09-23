@@ -6,7 +6,7 @@ createApp({
         const site = reactive({
             name: 'Sherrie Liang',
             brand: 'SL',
-            slogan: 'Designing Human-centered AI solutions that ship to production'
+            slogan: 'Designing Applicable AI solutions that ship to production'
         });
 
         // ===== Navigation =====
@@ -34,7 +34,7 @@ createApp({
             { name: 'Google Scholar', icon: 'ri-graduation-cap-fill', url: 'https://scholar.google.com/citations?user=-6BwIkQAAAAJ&hl=en' },
             { name: 'GitHub', icon: 'ri-github-fill', url: 'https://github.com/s2liang' },
             { name: 'LinkedIn', icon: 'ri-linkedin-fill', url: 'https://www.linkedin.com/in/sherrie-liang' },
-            { name: 'Email', icon: 'ri-mail-fill', url: 'mailto:sherryliang23@outlook.com' }
+            { name: 'Email', icon: 'ri-mail-fill', url: 'mailto:sherry.academia@gmail.com' }
         ]);
 
         // ===== About =====
@@ -58,9 +58,9 @@ createApp({
 
             { name: 'OpenAI APIs', level: 'advanced' },
             // { name: 'LLMs&Prompting', level: 'advanced' },
-            { name: 'Python', level: 'advanced' },
+            { name: 'Claude', level: 'advanced' },
             { name: 'Agentic-AI&Orchestration', level: 'advanced' },
-            { name: 'Multi-modal AI', level: 'intermediate' },
+            { name: 'Harness Engineering', level: 'intermediate' },
             // { name: 'Model Evaluation', level: 'intermediate' },
             { name: 'Proof of Concept', level: 'intermediate' },
             { name: 'AWS&Azure AI', level: 'intermediate' },
@@ -117,7 +117,7 @@ createApp({
 
         // ===== Experience =====
         const experience = ref([
-            { date: '2026 - ██', title: 'AI Solution Architect', company: 'Research Consultant', desc: 'Advise academic researchers on AI adoption strategies, translating complex research needs into actionable solutions — from selecting optimal data analysis frameworks to developing targeted AI tools that streamlined research operations.' },
+            { date: '2026 - ██', title: 'AI Architect', company: 'Louisiana State University', desc: 'Advise VPs/Professors on AI adoption strategies, translating complex enterprise/research needs into actionable solutions — from selecting optimal data analysis frameworks to developing targeted AI tools that streamlined research operations.' },
             { date: '2021 - 2025', title: 'Research Assistant/Engineering', company: 'Educatoin & Early Career', desc: 'Researched AI practability in collaborative robots and the construction industry; Delivered AI-powered prototypes, data products, and integration patterns; all that inform today\'s AI solution design.' },
             { date: '2014 - 2020', title: 'Architectual Engineering', company: 'Education', desc: 'Built strong fundamentals in data, programming, and the ability to break down complex problems into manageable solutions — the base for designing reliable AI solutions at scale.' }
         ]);
